@@ -22,7 +22,7 @@ post '/' do
   raw = request.env["rack.input"].read
   parsed = JSON.parse(raw)
   puts parsed.inspect
-  parsed
+  parsed.inspect
 end
 
 get "/" do
