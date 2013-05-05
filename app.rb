@@ -27,7 +27,7 @@ post '/' do
   client = HipChat::Client.new(ENV['API_TOKEN'])
   room = client[ENV['room']]
   build = parsed['build']
-  room.send("debugging: #{parsed.inspect}")
+  room.send('Igor', "debugging: #{parsed.inspect}")
 
   if %w{STARTED COMPLETED}.include?(build['phase'])
     # don't care: just want finished
