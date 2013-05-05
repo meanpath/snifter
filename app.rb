@@ -24,6 +24,11 @@ post '/' do
   client = HipChat::Client.new(ENV['API_TOKEN'])
   room = client[ENV['room']]
   build = parsed['build']
+  if build['phase'] == 'STARTED'
+    # don't care
+    return "OK"
+  end
+
   case build['status']
   when 'FAILED'
     room.send('Igor', "Igor regrets that a #{parsed['name']} build failed on branch #{build['parameters']['branch']} (#{build['full_url']}).
