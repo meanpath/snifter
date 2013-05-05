@@ -41,9 +41,9 @@ post '/' do
 Whip me, it's my fault probably.", :color => 'red')
   when 'SUCCESS'
 
-    room.send('Igor', "Igor is so happy: #{parsed['name']} is green. (#{buildlink(build['full_url'], build['full_url'])}).")
+    room.send('Igor', "Igor is so happy: #{parsed['name']} is green. (#{buildlink(build['full_url'], build['full_url'])}).", :color => 'green')
   else
-    room.send('Igor', "Stupid Igor is not clever enough for your command: #{parsed.inspect}")
+    room.send('Igor', "Stupid Igor is not clever enough for your command: #{parsed.inspect}", :color => 'purple')
   end
 
 end
