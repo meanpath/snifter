@@ -23,7 +23,7 @@ post '/' do
   parsed = JSON.parse(raw)
   client = HipChat::Client.new(ENV['API_TOKEN'])
   room = client[ENV['room']]
-  room.send(parsed.inspect)
+  room.send('Igor', parsed.inspect, :color => 'red')
 end
 
 get "/" do
