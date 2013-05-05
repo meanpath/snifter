@@ -17,6 +17,9 @@ require 'json'
 #           "parameters":{"branch":"master"}
 # 	 }
 # }
+def buildlink(link, text)
+  "<a href=\"#{link}\">text</a>"
+end
 
 post '/' do
   raw = request.env["rack.input"].read
@@ -31,16 +34,12 @@ post '/' do
 
   case build['status']
   when 'FAILED'
-    room.send('Igor', "Igor regrets that a #{parsed['name']} build failed on branch #{build['parameters']['branch']} (#{build['full_url']}).
+    room.send('Igor', "Igor regrets that a #{parsed['name']} build failed on branch #{build['parameters']['branch']} #{buildlink(build['full_url'], build['full_url'])}
 Whip me, it's my fault probably.", :color => 'red')
   when 'SUCCESS'
-    room.send('Igor', "Igor is so happy: branch #{build['parameters']['branch']} of #{parsed['name']} is green. (#{build['full_url']}).")
+    room.send('Igor', "Igor is so happy: branch #{build['parameters']['branch']} of #{parsed['name']} is green. (#{buildlink(build['full_url'], build['full_url'])}).")
   else
     room.send('Igor', "Stupid Igor is not clever enough for your command: #{parsed.inspect}")
   end
 
-end
-
-get "/" do
-  "Hello world!"
 end
