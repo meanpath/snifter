@@ -1,6 +1,6 @@
 require "bundler/setup"
 require "sinatra"
-require 'hipchat-rb'
+require 'hipchat'
 
 get "/" do
   "Hello world!"
