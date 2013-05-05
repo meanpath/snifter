@@ -23,7 +23,14 @@ post '/' do
   parsed = JSON.parse(raw)
   client = HipChat::Client.new(ENV['API_TOKEN'])
   room = client[ENV['room']]
-  room.send('Igor', parsed.inspect, :color => 'red')
+  build = parsed['build']
+  case build['status']
+  when 'FAILED'
+    room.send('Igor', "Igor regrets that a build failed on branch #{build['parameters']['branch']} (#{build['full_url']}). Whip me, it's my fault probably.", :color => 'red')
+  else
+    room.send('Igor', "Stupid Igor is not clever enough for your command: #{parsed.inspect}")
+  end
+
 end
 
 get "/" do
