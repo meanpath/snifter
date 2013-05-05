@@ -22,10 +22,10 @@ def buildlink(link)
 end
 
 happy_igor = ["No beating for Igor!",
-              "I haven't been this happy since Master let me practice surgery on the visitor who spoke with his mouth full",
-              "May choirs of angels sing you to your rest, sweet master"]
+              "I haven't been this happy since Master let me practice surgery on the visitor who spoke with his mouth full.",
+              "May choirs of angels sing you to your rest, sweet master."]
 
-sad_igor = ["Whip me, it's probably my fault",
+sad_igor = ["Whip me, it's probably my fault.",
             "Calloo callay, fire and brimstone upon the evildoers!",
             "Should I bring your spiked gauntlets, sir?"]
 
@@ -45,10 +45,10 @@ post '/' do
   case build['status']
   when 'FAILURE'
     room.send('Igor', "@mark @eric Igor regrets that a #{parsed['name']} build failed (#{buildlink(build['full_url'])}).
-#{sad_igor.sample}.", :color => 'red')
+#{sad_igor.sample}", :color => 'red')
   when 'SUCCESS'
 
-    room.send('Igor', "Igor is so happy: #{parsed['name']} is green. #{happy_igor.sample}. (#{buildlink(build['full_url'])}).", :color => 'green')
+    room.send('Igor', "Igor is so happy: #{parsed['name']} is green. #{happy_igor.sample} (#{buildlink(build['full_url'])}).", :color => 'green')
   else
     room.send('Igor', "Stupid Igor is not clever enough for your command: #{parsed.inspect}", :color => 'purple')
   end
