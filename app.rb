@@ -18,7 +18,7 @@ require 'json'
 # 	 }
 # }
 def buildlink(link, text)
-  "<a href=\"#{link}\">text</a>"
+  "<a href=\"#{link}\">#{text}</a>"
 end
 
 post '/' do
@@ -27,6 +27,8 @@ post '/' do
   client = HipChat::Client.new(ENV['API_TOKEN'])
   room = client[ENV['room']]
   build = parsed['build']
+  room.send("debugging: #{parsed.inspect}")
+
   if %w{STARTED COMPLETED}.include?(build['phase'])
     # don't care: just want finished
     return "OK"
@@ -37,6 +39,7 @@ post '/' do
     room.send('Igor', "Igor regrets that a #{parsed['name']} build failed on branch #{build['parameters']['branch']} #{buildlink(build['full_url'], build['full_url'])}
 Whip me, it's my fault probably.", :color => 'red')
   when 'SUCCESS'
+
     room.send('Igor', "Igor is so happy: branch #{build['parameters']['branch']} of #{parsed['name']} is green. (#{buildlink(build['full_url'], build['full_url'])}).")
   else
     room.send('Igor', "Stupid Igor is not clever enough for your command: #{parsed.inspect}")
