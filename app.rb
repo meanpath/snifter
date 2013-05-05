@@ -21,8 +21,9 @@ require 'json'
 post '/' do
   raw = request.env["rack.input"].read
   parsed = JSON.parse(raw)
-  puts parsed.inspect
-  parsed.inspect
+  client = HipChat::Client.new(ENV['API_TOKEN'])
+  room = client[ENV['room']]
+  room.send(parsed.inspect)
 end
 
 get "/" do
