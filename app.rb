@@ -36,7 +36,7 @@ post '/' do
 
   case build['status']
   when 'FAILURE'
-    room.send('Igor', "Igor regrets that a #{parsed['name']} build failed (#{buildlink(build['full_url'])}).
+    room.send('Igor', "@mark @eric Igor regrets that a #{parsed['name']} build failed (#{buildlink(build['full_url'])}).
 Whip me, it's my fault probably.", :color => 'red')
   when 'SUCCESS'
 
