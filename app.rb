@@ -24,8 +24,8 @@ post '/' do
   client = HipChat::Client.new(ENV['API_TOKEN'])
   room = client[ENV['room']]
   build = parsed['build']
-  if build['phase'] == 'STARTED'
-    # don't care
+  if %w{STARTED COMPLETED}.include?(build['phase'])
+    # don't care: just want finished
     return "OK"
   end
 
@@ -33,7 +33,7 @@ post '/' do
   when 'FAILED'
     room.send('Igor', "Igor regrets that a #{parsed['name']} build failed on branch #{build['parameters']['branch']} (#{build['full_url']}).
 Whip me, it's my fault probably.", :color => 'red')
-  when 'SUCCEEDED'
+  when 'SUCCESS'
     room.send('Igor', "Igor is so happy: branch #{build['parameters']['branch']} of #{parsed['name']} is green. (#{build['full_url']}).")
   else
     room.send('Igor', "Stupid Igor is not clever enough for your command: #{parsed.inspect}")
