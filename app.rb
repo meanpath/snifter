@@ -30,7 +30,7 @@ sad_igor = ["Whip me, it's probably my fault.",
             "Should I bring your spiked gauntlets, sir?"]
 
 secret_root = ENV['SECRET_ROOT']
-post "/#{secret_root} do
+post "/#{secret_root}" do
   raw = request.env["rack.input"].read
   parsed = JSON.parse(raw)
   client = HipChat::Client.new(ENV['API_TOKEN'])
