@@ -31,10 +31,10 @@ sad_igor = ["Whip me, it's probably my fault.",
 
 secret_root = ENV['SECRET_ROOT']
 
-post /#{secret_root}/adam do
+post "/#{secret_root}/adam" do
   client = HipChat::Client.new(ENV['API_TOKEN'])
   room = client[ENV['room']]
-  room.send("AdamCEO", params[:message]) 
+  room.send("AdamCEO", params[:message])
 end
 
 post "/#{secret_root}" do
