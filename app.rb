@@ -49,7 +49,7 @@ post "/#{secret_root}" do
     # don't care: just want finished
     return "OK"
   end
-
+  return "OK" # disabling untill we fix it
   case build['status']
   when 'FAILURE'
     room.send('Igor', "@mark @eric Igor regrets that a #{parsed['name']} build failed (#{buildlink(build['full_url'])}).
